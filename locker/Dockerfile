@@ -14,10 +14,10 @@ MAINTAINER Paulo Gomes
 RUN yum update -y
 
 # Install Remi Collet Repository
-RUN rpm -Uvh http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-7.noarch.rpm && rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
+RUN rpm -Uvh http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-9.noarch.rpm && rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
 
 # Install apache, php
-RUN yum -y --enablerepo=remi,remi-php56 install httpd php php-pdo php-common php-cli php-pear php-mysqlnd php-pecl-mongo php-gd php-mbstring* php-mcrypt php-xml mongodb nodejs npm git deltarpm
+RUN yum -y --enablerepo=remi,remi-php56 install httpd php php-pdo php-common php-cli php-pear php-mysqlnd php-pecl-mongo php-gd php-mbstring* php-mcrypt php-xml php-bcmath mongodb nodejs npm git deltarpm
 
 # Install Bower
 RUN npm install -g bower
@@ -44,8 +44,8 @@ ADD ./conf/database.php /learninglocker/app/config/local/database.php
 ADD ./conf/mail.php /learninglocker/app/config/local/mail.php
 
 # add migrations script
-ADD migrations.sh /migrations.sh
-RUN chmod +x /migrations.sh
+#ADD migrations.sh /migrations.sh
+#RUN chmod +x /migrations.sh
 
 RUN chown -R apache:apache /learninglocker
 RUN cd  /var/www; ln -s /learninglocker
